@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Leslie's Portfolio</title>
+</head>
+
+<body>
+<h1>Filtering through Leslie's Portfolio</h1>
+<h2>Projects</h2>
+<!--Got code from w3schools.com http://www.w3schools.com/tags/tag_button.asp-->
+<button type="button">School</button> </br>
+<button type="button">Work</button>
+
+<!--From Tutorial 2 - YouTube-->
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        Results:
+        <pre>
+            {% for message in messages %}
+{{message}}
+            {% endfor %}
+        </pre>
+    {% endif %}
+{% endwith %}
+
+
+</body>
+</html>
