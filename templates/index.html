@@ -7,23 +7,39 @@
 
 <body>
 <h1>Filtering through Leslie's Portfolio</h1>
+<a title="List All Projects" target="_blank" href="http://localhost:5000">List All Project</a>
 <h2>Projects</h2>
 <!--Got code from w3schools.com http://www.w3schools.com/tags/tag_button.asp-->
-<button type="button">School</button> </br>
+<button type="button">School</button> <br/>
 <button type="button">Work</button>
 
-<!--From Tutorial 2 - YouTube-->
-{% with messages = get_flashed_messages() %}
-    {% if messages %}
-        Results:
-        <pre>
-            {% for message in messages %}
-{{message}}
-            {% endfor %}
-        </pre>
-    {% endif %}
-{% endwith %}
+<!--{{prjs}}-->
 
+<!--From Tutorial 2 - YouTube-->
+
+<table>
+    <tr>
+        <th>Project Title:</th>
+        <th>Project Phase:</th>
+        <th># People Experienced:</th>
+    </tr>
+    {% for project in prjs %}
+    <tr>
+        <td>{{project.project_title}}</td>
+        <td>{{project.phase_name}}</td>
+        <td>{{project.num_of_people_experienced}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+<div>
+    {% for year in years %}
+        {{year}}
+        <br/>
+    {% endfor %}
+</div>
+
+<!--Leslie needs to figure out DIV's-->
 
 </body>
 </html>
