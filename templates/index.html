@@ -3,36 +3,92 @@
 <html>
 <head>
     <title>Leslie's Portfolio</title>
+<!--    <style type="text/css" title="currentStyle" media="screen">
+		@import "leslieportfolio.css";
+	</style>-->
+    <style type="text/css">
+table,th,td {
+    border:1px solid black;
+}
+
+headerbox {
+    background-color:#FFD700
+}
+    </style>
 </head>
 
 <body>
-<h1>Filtering through Leslie's Portfolio</h1>
-<a title="List All Projects" target="_blank" href="http://localhost:5000">List All Project</a>
-<h2>Projects</h2>
-<!--Got code from w3schools.com http://www.w3schools.com/tags/tag_button.asp-->
-<button type="button">School</button> <br/>
-<button type="button">Work</button>
+<div id="headerbox">
+    <h1 style="margin-bottom:0;">Filtering through Leslie's Portfolio</h1>
+</div>
+
+<div id='subheading'>
+    <a title="List All Projects" target="_blank" href="http://localhost:5000/allprojects">List All Project</a>
+</div>
 
 <!--{{prjs}}-->
 
 <!--From Tutorial 2 - YouTube-->
+<div id="project_menu" style="background-color:#FFD700;height:700px;width:20%;float:left;">
+    <h2>Projects</h2>
+<!--Got code from w3schools.com http://www.w3schools.com/tags/tag_button.asp-->
+    <button type="button">School</button> <br/>
+    <button type="button">Work</button> <br/>
+    <button type="button">Internships</button> <br/>
+    <button type="button">American Institute of Architects (AIA)</button> <br/>
+</div>
 
-<table>
-    <tr>
-        <th>Project Title:</th>
-        <th>Project Phase:</th>
-        <th># People Experienced:</th>
-    </tr>
-    {% for project in prjs %}
-    <tr>
-        <td>{{project.project_title}}</td>
-        <td>{{project.phase_name}}</td>
-        <td>{{project.num_of_people_experienced}}</td>
-    </tr>
-    {% endfor %}
-</table>
+<div id="main" style="background-color: #FF0000; height:500px;width:60%;float:left;">
+    <h2>Results</h2>
+    <table>
+        <tr>
+            <th>Project Title:</th>
+            <th>Project Phase:</th>
+            <th># People Experienced:</th>
+        </tr>
+        {% for project in prjs %}
+        <tr>
+            <td>{{project.project_title}}</td>
+            <td>{{project.phase_name}}</td>
+            <td>{{project.num_of_people_experienced}}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</div>
 
-<div>
+<div id="people_menu" style="background-color:#FFD700;height:500px;width:20%;float:left;">
+    <h2>No. of People Experienced</h2>
+<!--Got code from w3schools.com http://www.w3schools.com/tags/tag_button.asp-->
+    <button type="button">1-5</button> <br/>
+    <button type="button">5-10</button>
+        <br/>
+        <br/>
+        <br/>
+    <hr>
+    
+    <h2>Project Locations</h2>
+    <button type="button">Berkeley</button> <br/>
+    <button type="button">Japan</button> <br/>
+        <br/>
+        <br/>
+    <hr>
+    
+    <h2>Tools</h2>
+    <button type="button">Scrivner</button> <br/>
+    <button type="button">Powerpoint</button> <br/>
+</div>
+
+<br><hr><br>
+
+<div id="years"; style="height:40px; width:80%; float:right;">
+    <h2>Years</h2>
+    <button type="button">2012</button>
+    <button type="button">2011</button>
+    <button type="button">2010</button>
+    <button type="button">2009</button>
+    <button type="button">2008</button>
+    <button type="button">2007</button>
+    <br>
     {% for year in years %}
         {{year}}
         <br/>

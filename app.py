@@ -1,16 +1,3 @@
-#from flask import Flask
-#app = Flask(__name__)
-#
-#@app.route("/")
-#def hello():
-#    return "Hello World!"
-###Leslie needs to route this to the index.html page.
-#
-#
-#if __name__ == "__main__":
-#    app.debug = True
-#    app.run()
-#
 ##This comes from YouTube tutorial.
 
 import flask, flask.views
@@ -25,13 +12,15 @@ class View(flask.views.MethodView):
     def get(self):
         p = DataController()
         p.read_file()
-        projects = p.get_project_phases('Construction')
+        #Sarah helped to set up return flask.render_template 6/25/12
+        phases = p.get_project_phases('Construction')
         return flask.render_template('index.html',
                                      prjs=p.get_project_phases('Construction'),
                                      years=p.get_years(),
-                                     orgs=p.get_orgs(),
-                                     num_ppl=p.get_num_ppl(),
+                                     orgs=p.get_orgs('AIA'),
+                                     num_ppl=p.get_num_ppl(20),
                                      tools=p.get_tools())
+        
     
 app.add_url_rule('/', view_func=View.as_view('Main'), methods=['GET'])
 

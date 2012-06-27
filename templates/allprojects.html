@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>All Projects List</title>
+</head>
+
+<body>
+    This is a list of all of Leslie Tom's projects in her portfolio.
+<table>
+    <tr>
+        <th>Project Title:</th>
+        <th>Project Phase:</th>
+        <th># People Experienced:</th>
+    </tr>
+    {% for project in prjs %}
+    <tr>
+        <td>{{project.project_title}}</td>
+        <td>{{project.phase_name}}</td>
+        <td>{{project.num_of_people_experienced}}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+
+</body>
+</html>
