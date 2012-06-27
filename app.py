@@ -4,9 +4,13 @@ import flask, flask.views
 from model.portfolio_model import DataController
 app = flask.Flask(__name__)
 
-#class View(flask.views.MethodView):
-#    def get(self):
-#        return 'Hello There!'
+class bySchool(flask.views.MethodView):
+    def get(self):
+        return flask.render_template('bySchool.html')
+
+class AllProjects(flask.views.MethodView):
+    def get(self):
+        return flask.render_template('allprojects.html')
 
 class View(flask.views.MethodView):
     def get(self):
@@ -22,7 +26,9 @@ class View(flask.views.MethodView):
                                      tools=p.get_tools())
         
     
-app.add_url_rule('/', view_func=View.as_view('Main'), methods=['GET'])
+app.add_url_rule('/allprojects', view_func=AllProjects.as_view('allprojects'), methods=['GET'])
+app.add_url_rule('/bySchool', view_func=bySchool.as_view('bySchool'), methods=['GET'])
+app.add_url_rule('/', view_func=View.as_view('index'), methods=['GET'])
 
 app.debug = True
 app.run()
