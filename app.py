@@ -6,24 +6,42 @@ app = flask.Flask(__name__)
 
 class bySchool(flask.views.MethodView):
     def get(self):
-        return flask.render_template('bySchool.html')
+        return flask.render_template('index.html')
 
 class AllProjects(flask.views.MethodView):
     def get(self):
-        return flask.render_template('allprojects.html')
+        p = DataController()
+        p.read_file()
+        allprojects = p.get_all_projects()
+        return flask.render_template('allprojects.html',
+                                     prjs=allprojects,
+                                     years=p.get_years(),
+                                     orgs=p.get_orgs(),
+                                     num_ppl=p.get_num_ppl(),
+                                     tools=p.get_tools())
 
 class View(flask.views.MethodView):
     def get(self):
         p = DataController()
         p.read_file()
+        org_filter = flask.request.args.get('org', None)
+        year_filter = flask.request.args.get('year', None)
+        people_filter = flask.request.args.get('num_people', None)
+        
+        projects = p.get_projects(org=org_filter, year=year_filter, num_people=people_filter)
+
+            
+            
         #Sarah helped to set up return flask.render_template 6/25/12
-        phases = p.get_project_phases('Construction')
         return flask.render_template('index.html',
-                                     prjs=p.get_project_phases('Construction'),
+                                     prjs=projects,
                                      years=p.get_years(),
-                                     orgs=p.get_orgs('AIA'),
-                                     num_ppl=p.get_num_ppl(20),
-                                     tools=p.get_tools())
+                                     orgs=p.get_orgs(),
+                                     people=p.get_num_ppl(),
+                                     tools=p.get_tools(),
+                                     selected_org=org_filter,
+                                     selected_year=year_filter,
+                                     selected_num_people=people_filter)
         
     
 app.add_url_rule('/allprojects', view_func=AllProjects.as_view('allprojects'), methods=['GET'])

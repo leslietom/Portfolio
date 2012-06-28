@@ -4,18 +4,28 @@
 
 {% block content %}
 
-    <h2>Results</h2>
+    <h2>Results  {{params}}</h2>
     <table>
         <tr>
+            <th>Organization/Client:</th>
             <th>Project Title:</th>
             <th>Project Phase:</th>
             <th># People Experienced:</th>
+            <th>Place:</th>
+            <th>Tools:</th>
+            <th>Start Date:</th>
+            <th>End Date:</th>
         </tr>
         {% for project in prjs %}
-        <tr>
+        <tr> 
+            <td>{{project.organization_category}}</td>
             <td>{{project.project_title}}</td>
             <td>{{project.phase_name}}</td>
             <td>{{project.num_of_people_experienced}}</td>
+            <td>{{project.places}}</td>
+            <td>{{project.tools}}</td>
+            <td>{{project.start_date}}</td>
+            <td>{{project.end_date}}</td>
         </tr>
         {% endfor %}
      </table>

@@ -20,7 +20,7 @@
 </head>
 <body>
    <div id="headerbox">
-      <h1 style="margin-bottom:0;">Filtering through Leslie's Portfolio</h1>
+      <a href="/"><h1 style="margin-bottom:0;">Filtering through Leslie's Portfolio</h1></a>
    </div>
 
    <div id='subheading'>
@@ -29,13 +29,16 @@
 
    <!--From Tutorial 2 - YouTube-->
    <div id="project_menu" style="background-color:#FFD700;height:700px;width:20%;float:left;">
-      <h2>Projects</h2>
+      <h2>Organizations/Clients</h2>
       <!--Got code from w3schools.com http://www.w3schools.com/tags/tag_button.asp-->
       <a href="/bySchool"><button type="button">School</button></a>
       <br/>
-      <button type="button">Work</button> <br/>
-      <button type="button">Internships</button> <br/>
-      <button type="button">American Institute of Architects (AIA)</button> <br/>
+      {%for org in orgs%}
+        <!--button type="button">{{org}}</button> <br/>-->
+        <a href="/?org={{org}}">{{org}}</a>
+        {% if org == selected_org %}*** {% endif %}
+        <br/>
+      {% endfor %}
    </div>
 
    <div id="main" style="background-color: #FF0000; height:500px;width:60%;float:left;">
@@ -44,12 +47,11 @@
 
    <div id="people_menu" style="background-color:#FFD700;height:500px;width:20%;float:left;">
       <h2>No. of People Experienced</h2>
-      <!--Got code from w3schools.com http://www.w3schools.com/tags/tag_button.asp-->
-      <button type="button">1-5</button> <br/>
-      <button type="button">5-10</button>
-      <br/>
-      <br/>
-      <br/>
+        {%for num_people in people%}
+        <a href="/?num_people={{num_people}}">{{num_people}}</a> 
+        {% if num_people == selected_num_people %}*** {% endif %} <br/>
+        <!--<button type="button">{{person}}</button> <br/> -->
+      {% endfor %}
       <hr>
 
       <h2>Project Locations</h2>
@@ -68,16 +70,9 @@
 
    <div id="years"; style="height:40px; width:80%; float:right;">
       <h2>Years</h2>
-      <button type="button">2012</button>
-      <button type="button">2011</button>
-      <button type="button">2010</button>
-      <button type="button">2009</button>
-      <button type="button">2008</button>
-      <button type="button">2007</button>
-      <br>
-      {% for year in years %}
-      {{year}}
-      <br/>
+      {%for year in years%}
+        <a href="/?year={{year}}">{{year}}</a>
+        <!--<button type="button">{{year}}</button> -->
       {% endfor %}
    </div>
 </body>

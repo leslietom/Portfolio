@@ -3,7 +3,23 @@
 {% block title %}All Projects{% endblock %}
 
 {% block content %}
+ 
+All projects
 
- these are all projects
+    <h2>Results</h2>
+    <table>
+        <tr>
+            <th>Project Title:</th>
+            <th>Project Phase:</th>
+            <th># People Experienced:</th>
+        </tr>
+        {% for project in prjs %}
+        <tr>
+            <td>{{project.project_title}}</td>
+            <td>{{project.phase_name}}</td>
+            <td>{{project.num_of_people_experienced}}</td>
+        </tr>
+        {% endfor %}
+     </table>
 
 {% endblock %}

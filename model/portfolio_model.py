@@ -26,6 +26,9 @@ class Project:
         except:
             return ''
         
+    def start_year(self):
+        return self.start_date.strftime('%Y')
+        
     #Sarah helped me make parse date and Output year methods.
     def parse_date(self, date_string):
         '''
@@ -52,7 +55,13 @@ class DataController:
             print(line)
             self.projects.append(Project(line))
         f.close()
-            
+
+    def get_all_projects(self):
+        '''
+        Returns a list of projects where the phase name matches. This also tells which resource initially shows.
+        '''
+        return self.projects
+    
     def get_project_phases(self, phase):
         '''
         Returns a list of projects where the phase name matches. This also tells which resource initially shows.
@@ -63,42 +72,51 @@ class DataController:
             if project.phase_name == phase:
                 projects.append(project)
         return projects
-    
-    # Leslie to still figure out how to make date objects - and organize only by year -- trying to just get to work.
-    #def get_years(self, date):
-    #    '''
-    #    Returns a list of projects where the years match the user's choice.
-    #    '''
-    #    projects = []
-    #    for project in self.projects:
-    #        if project.start_date == startdate:
-    #            projects.append(project)
-    #    return projects
-    
-    #put here because trial - didn't work above.
-    def get_years(self):
-        return[2008, 2009]
+
+    def get_projects(self, org=None, phase='Construction', year=None, num_people=None):
+        '''
+        Returns a list of projects where the phase name matches. This also tells which resource initially shows.
+        '''
+        projects = []
+        for project in self.projects:
+            #print(project.phase_name)
+            #if (project.phase_name == phase and
+            if ((org is None or project.organization_category == org) and
+                (year is None or project.start_year() == year) and
+                (num_people is None or project.num_of_people_experienced == num_people)):
+                projects.append(project)
+        return projects
         
-    def get_orgs(self, organization_name):
+    def get_years(self):
+        years = set()
+        for project in self.projects:
+            years.add(project.output_year(project.start_date))
+            years.add(project.output_year(project.end_date))#for set
+        years = list(years)
+        years.sort(reverse=True) 
+        return years
+        
+    def get_orgs(self):
         '''
         Returns a list of projects where the get organizations matches.  This is called projects in HTML.
         '''
-        projects = []
+        organizations = set()
         for project in self.projects:
-            if project.organization_category == organization_name:
-                projects.append(project)
-        return projects
+            organizations.add(project.organization_category) #for set
+        organizations = list(organizations)
+        organizations.sort()
+        return organizations
     
-    def get_num_ppl(self, people_experienced):
+    def get_num_ppl(self):
         '''
         Returns a list of projects where the number of people experienced matches.
         '''
-        projects = []
+        people = set()
         for project in self.projects:
-            if project.num_of_people_experienced == people_experienced:
-                projects.append(project)
-        return projects.sort()
-        #return [2, 3].sort()
+            people.add(project.num_of_people_experienced) 
+        people = list(people)
+        people.sort()
+        return people
     
     def get_tools(self):
         return ['Photoshop', 'Word']
