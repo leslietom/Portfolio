@@ -81,7 +81,8 @@ class DataController:
                 projects.append(project)
         return projects
 
-    def get_projects(self, org=None, phase='Construction', year=None, num_people=None, place=None):
+    #Sarah helped to start - a method that passes everything. 6/27/12
+    def get_projects(self, org=None, phase='Construction', year=None, num_people=None, place=None, tool=None):
         '''
         Returns a list of projects where the phase name matches. This also tells which resource initially shows.
         '''
@@ -92,7 +93,8 @@ class DataController:
             if ((org is None or project.organization_category == org) and
                 (year is None or project.start_year() == year) and
                 (num_people is None or project.num_of_people_experienced == num_people) and
-                (place is None or project.places == place)):
+                (place is None or project.places == place) and
+                (tool is None or project.tools == tool)):
                 projects.append(project)
         return projects
         
@@ -149,13 +151,12 @@ class DataController:
         '''
         Returns a list of tools used.
         '''
-        #tools = set()
-        #for project in self.projects:
-        #    tools.add(project.tools) #for set
-        #tools = list(tools)
-        #tools.sort()
-        #return tools
-        return ['Photoshop', 'Scrivener']
+        tools = set()
+        for project in self.projects:
+            tools.add(project.tools) #for set
+        tools = list(tools)
+        tools.sort()
+        return tools
             
     def print_titles(self, projects):
         '''

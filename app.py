@@ -30,22 +30,24 @@ class View(flask.views.MethodView):
         year_filter = flask.request.args.get('year', None)
         people_filter = flask.request.args.get('num_people', None)
         place_filter = flask.request.args.get('place', None)
+        tool_filter = flask.request.args.get('tool', None)
         
-        projects = p.get_projects(org=org_filter, year=year_filter, num_people=people_filter, place=place_filter)
+        projects = p.get_projects(org=org_filter, year=year_filter, num_people=people_filter, place=place_filter, tool=tool_filter)
             
             
         #Sarah helped to set up return flask.render_template 6/25/12
         return flask.render_template('index.html',
                                      prjs=projects,
-                                     years=p.get_years(),
                                      orgs=p.get_orgs(),
+                                     years=p.get_years(),
                                      people=p.get_num_ppl(),
                                      tools=p.get_tools(),
                                      places=p.get_places(),
                                      selected_org=org_filter,
                                      selected_year=year_filter,
                                      selected_num_people=people_filter,
-                                     selected_place=place_filter)
+                                     selected_place=place_filter,
+                                     selected_tool=tool_filter)
         
 
 #This is how you create more web pages / templates.    

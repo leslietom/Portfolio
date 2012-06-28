@@ -37,7 +37,7 @@
         <ul>
             <li><a href="/?org={{org}}">{{org}}</a>
         <!--This creates an if statement - if link is selected, it will mark the link. -->
-        {% if org == selected_org %}*** {% endif %}
+            {% if org == selected_org %}*** {% endif %}
             </li>
         </ul>
       {% endfor %}
@@ -57,8 +57,6 @@
       <hr>
 
       <h2>Project Locations</h2>
-<!--      <button type="button">Berkeley</button> <br/>
-      <button type="button">Japan</button> <br/>-->
         {%for place in places%}
         <a href="/?place={{place}}">{{place}}</a>
         {% if place == selected_place %}*** {% endif %}
@@ -67,8 +65,11 @@
       <hr>
 
       <h2>Tools</h2>
-      <button type="button">Scrivner</button> <br/>
-      <button type="button">Powerpoint</button> <br/>
+        {%for tool in tools%}
+        <a href="/?tool={{tool}}">{{tool}}</a>
+        {% if tool == selected_tool %}*** {% endif %}
+        <br/>
+        {% endfor %}
    </div>
 
    <br><hr><br>
