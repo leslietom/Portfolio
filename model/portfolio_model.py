@@ -22,6 +22,10 @@ class Project:
         self.num_of_people_experienced = cells[6]
         self.places = cells[7]
         self.phase_name = cells[8].strip()
+        self.fullproject_title = cells[9]
+        self.image_url = cells[10]
+        self.organization_names = cells[11]
+        self.about = cells[12]
         
     def clean_string(self, cells, index):
         try:
@@ -53,7 +57,7 @@ class DataController:
         self.projects = []
     
     #Sarah helped me find the file directory path and worked on cleaning up my csv data from using Excel and spliting on ';'
-    def read_file(self, file_name='/Users/leslietom/Dropbox/iSchool Berkeley/i206summer/i206_Final Project/website/static/data/2012portfolio_leslie2.csv'):
+    def read_file(self, file_name='/Users/leslietom/Dropbox/iSchool Berkeley/i206summer/i206_Final Project/website/static/data/2012portfolio_leslie1.csv'):
         '''
         Reads a file and populates self.projects with a list of Project objects
         '''
@@ -164,3 +168,14 @@ class DataController:
         '''
         for project in projects:
             print(project.project_title)
+            
+    def get_image_urls(self):
+        '''
+        Returns a list of images from Flickr
+        '''
+        urls = set()
+        for project in self.projects:
+            urls.add(project.urls)
+            urls = list(tools)
+            tools.sort()
+            return urls
