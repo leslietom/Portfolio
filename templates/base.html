@@ -27,17 +27,19 @@
       <a title="List All Projects" href="/allprojects">List All Project</a>
    </div>
 
-   <!--From Tutorial 2 - YouTube-->
+    <!--Worked with Sarah to iterate through DataController methods 6/27/12-->
    <div id="project_menu" style="background-color:#FFD700;height:700px;width:20%;float:left;">
       <h2>Organizations/Clients</h2>
       <!--Got code from w3schools.com http://www.w3schools.com/tags/tag_button.asp-->
       <a href="/bySchool"><button type="button">School</button></a>
       <br/>
       {%for org in orgs%}
-        <!--button type="button">{{org}}</button> <br/>-->
-        <a href="/?org={{org}}">{{org}}</a>
+        <ul>
+            <li><a href="/?org={{org}}">{{org}}</a>
+        <!--This creates an if statement - if link is selected, it will mark the link. -->
         {% if org == selected_org %}*** {% endif %}
-        <br/>
+            </li>
+        </ul>
       {% endfor %}
    </div>
 
@@ -55,10 +57,13 @@
       <hr>
 
       <h2>Project Locations</h2>
-      <button type="button">Berkeley</button> <br/>
-      <button type="button">Japan</button> <br/>
-      <br/>
-      <br/>
+<!--      <button type="button">Berkeley</button> <br/>
+      <button type="button">Japan</button> <br/>-->
+        {%for place in places%}
+        <a href="/?place={{place}}">{{place}}</a>
+        {% if place == selected_place %}*** {% endif %}
+        <br/>
+        {% endfor %}
       <hr>
 
       <h2>Tools</h2>

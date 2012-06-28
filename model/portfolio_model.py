@@ -8,6 +8,9 @@ from datetime import datetime
 
 class Project:
     def __init__(self, line):
+        '''
+        Instantiates all the variables from the lines read in from the csv file.
+        '''
         cells= line.split(',')
         #calling organization_category "Project"
         self.organization_category = cells[0] 
@@ -25,9 +28,13 @@ class Project:
             return cells[index].strip().replace('"', '')
         except:
             return ''
-        
+    
+    #Sarah helped me make a start_year to plug into get_project method
     def start_year(self):
         return self.start_date.strftime('%Y')
+        
+    def end_year(self):
+        return self.end_date.strftime('Y')
         
     #Sarah helped me make parse date and Output year methods.
     def parse_date(self, date_string):
@@ -74,7 +81,7 @@ class DataController:
                 projects.append(project)
         return projects
 
-    def get_projects(self, org=None, phase='Construction', year=None, num_people=None):
+    def get_projects(self, org=None, phase='Construction', year=None, num_people=None, place=None):
         '''
         Returns a list of projects where the phase name matches. This also tells which resource initially shows.
         '''
@@ -84,7 +91,8 @@ class DataController:
             #if (project.phase_name == phase and
             if ((org is None or project.organization_category == org) and
                 (year is None or project.start_year() == year) and
-                (num_people is None or project.num_of_people_experienced == num_people)):
+                (num_people is None or project.num_of_people_experienced == num_people) and
+                (place is None or project.places == place)):
                 projects.append(project)
         return projects
         
@@ -126,27 +134,28 @@ class DataController:
         people.sort()
         return people
     
-    def get_locations(self):
+    def get_places(self):
         '''
-        Returns a list of project locations.
+        Returns a list of project locations / places.
         '''
-        locations = set()
+        places = set()
         for project in self.projects:
-            location.add(project.places) 
-        locations = list(locations)
-        locations.sort()
-        return locations
+            places.add(project.places) 
+        places = list(places)
+        places.sort()
+        return places
     
     def get_tools(self):
         '''
         Returns a list of tools used.
         '''
-        tools = set()
-        for project in self.projects:
-            tools.add(project.tools) #for set
-        tools = list(tools)
-        tools.sort()
-        return tools
+        #tools = set()
+        #for project in self.projects:
+        #    tools.add(project.tools) #for set
+        #tools = list(tools)
+        #tools.sort()
+        #return tools
+        return ['Photoshop', 'Scrivener']
             
     def print_titles(self, projects):
         '''
@@ -154,8 +163,3 @@ class DataController:
         '''
         for project in projects:
             print(project.project_title)
-                
-
-#p = DataController()
-#p.read_file()
-#print(p.projects)
