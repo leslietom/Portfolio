@@ -56,9 +56,10 @@ class DataController:
             self.projects.append(Project(line))
         f.close()
 
+    #Worked with Sarah 6/27/12 to help get all projects.
     def get_all_projects(self):
         '''
-        Returns a list of projects where the phase name matches. This also tells which resource initially shows.
+        Returns a list of all projects.
         '''
         return self.projects
     
@@ -79,7 +80,7 @@ class DataController:
         '''
         projects = []
         for project in self.projects:
-            #print(project.phase_name)
+            #comment out hard coded phase name.  To be put in when more projects populate csv list. 
             #if (project.phase_name == phase and
             if ((org is None or project.organization_category == org) and
                 (year is None or project.start_year() == year) and
@@ -87,12 +88,19 @@ class DataController:
                 projects.append(project)
         return projects
         
+    #This method may return blank output on base.HTML page because did not tie end dates into HTML.
     def get_years(self):
+        '''
+        Returns a unique list of all start and end dates.
+        '''
+        #create a set to get all unique values.
         years = set()
         for project in self.projects:
             years.add(project.output_year(project.start_date))
-            years.add(project.output_year(project.end_date))#for set
+            years.add(project.output_year(project.end_date))
+        #turn set into a list
         years = list(years)
+        #have the most recent years printed out first.
         years.sort(reverse=True) 
         return years
         
@@ -118,8 +126,27 @@ class DataController:
         people.sort()
         return people
     
+    def get_locations(self):
+        '''
+        Returns a list of project locations.
+        '''
+        locations = set()
+        for project in self.projects:
+            location.add(project.places) 
+        locations = list(locations)
+        locations.sort()
+        return locations
+    
     def get_tools(self):
-        return ['Photoshop', 'Word']
+        '''
+        Returns a list of tools used.
+        '''
+        tools = set()
+        for project in self.projects:
+            tools.add(project.tools) #for set
+        tools = list(tools)
+        tools.sort()
+        return tools
             
     def print_titles(self, projects):
         '''
