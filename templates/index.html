@@ -3,8 +3,12 @@
 {% block title %}Homepage{% endblock %}
 
 {% block content %}
-
-    <h2>Project List  {{params}}</h2>
+    <div id='small_portfolio' style="background-color: #FFFFFF; height:100px;width:50%;float:left; border-width: 1px;">
+        {% for project in prjs %}
+            <img src="{{project.image_urls}}" height="100px"/>
+        {% endfor %}
+    </div>
+<h2>Project List  {{params}}</h2>
     <table>
         <tr>
             <th>Organization/Client:</th>
@@ -26,9 +30,17 @@
             <td>{{project.tools}}</td>
             <td>{{project.start_date}}</td>
             <td>{{project.end_date}}</td>
+            <td><img src="{{project.image_urls}}" height="100px"/></td>
+            <td>{{project.image_urls}}</td>
+            
+            
 
         </tr>
         {% endfor %}
+            <div id='smaller_main; height:30px; width:30%; float:center;'>
+        <a href="http://www.flickr.com/photos/les733/7250501718/"
+           title="Navigating An Educational Experience By Augmenting Our Reality (NEEAR) (Deepak Subramanian &amp; Leslie Tom) by Les733, on Flickr"><img src="http://farm8.staticflickr.com/7217/7250501718_87584a49bb.jpg" alt="Navigating An Educational Experience By Augmenting Our Reality (NEEAR) (Deepak Subramanian &amp; Leslie Tom)"></a>
+    </div>
      </table>
 
 {% endblock %}

@@ -6,4 +6,8 @@
 
 project id is {{project_id}}
 
+ {%for org in orgs%}
+    <a href="/project/{{project_id}}</a>
+ {% endfor %}
+
 {% endblock %}

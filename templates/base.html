@@ -46,15 +46,11 @@
       {% endfor %}
    </div>
 
-   <div id="main" style="background-color: #FF0000; height:500px;width:60%;float:left; border-width: 1px;">
+   <div id="main" style="background-color: #FF0000; height:700px;width:60%;float:left; border-width: 1px;">
     <div id="content">{% block content %}{% endblock %}</div>
-    <div id='smaller_main; height:30px; width:30%; float:center;'>
-        <a href="http://www.flickr.com/photos/les733/7250501718/"
-           title="Navigating An Educational Experience By Augmenting Our Reality (NEEAR) (Deepak Subramanian &amp; Leslie Tom) by Les733, on Flickr"><img src="http://farm8.staticflickr.com/7217/7250501718_87584a49bb.jpg" alt="Navigating An Educational Experience By Augmenting Our Reality (NEEAR) (Deepak Subramanian &amp; Leslie Tom)"></a>
-    </div>
    </div>
 
-   <div id="people_menu" style="background-color:#FFD700;height:500px;width:20%;float:left; border-width: 1px;">
+   <div id="people_menu" style="background-color:#FFD700;height:700px;width:20%;float:left; border-width: 1px;">
       <h2>No. of People Experienced</h2>
         {%for num_people in people%}
         <a href="/?num_people={{num_people}}">{{num_people}}</a> 
@@ -77,15 +73,13 @@
         {% if tool == selected_tool %}*** {% endif %}
         <br/>
         {% endfor %}
-   </div>
-
-   <br><hr><br>
-
-   <div id="years"; style="height:40px; width:80%; float:right;">
+      <hr>
+            
       <h2>Years</h2>
-      {%for year in years%}
+        {%for year in years%}
         <a href="/?year={{year}}">{{year}}</a>
-        <!--<button type="button">{{year}}</button> -->
+        {% if years == selected_year %}*** {% endif %}
+        <br/>
       {% endfor %}
    </div>
 </body>

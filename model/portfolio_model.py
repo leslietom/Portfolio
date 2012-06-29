@@ -100,7 +100,7 @@ class DataController:
                 (num_people is None or project.num_of_people_experienced == num_people) and
                 (place is None or project.places == place) and
                 (tool is None or project.tools == tool) and
-                (image_url is None or project.image_urls == image_urls)):
+                (image_url is None or project.image_urls == image_url)):
                 projects.append(project)
         return projects
     
