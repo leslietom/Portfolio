@@ -15,6 +15,7 @@
             <th>Tools:</th>
             <th>Start Date:</th>
             <th>End Date:</th>
+            <th>URL:</th>
         </tr>
         {% for project in prjs %}
         <tr> 
@@ -26,6 +27,7 @@
             <td>{{project.tools}}</td>
             <td>{{project.start_date}}</td>
             <td>{{project.end_date}}</td>
+            <td>{{project.image_urls}}</td>
         </tr>
         {% endfor %}
      </table>

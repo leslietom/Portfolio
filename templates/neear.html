@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block title %}Navigating an Educational Experience through Augmenting our Reality{% endblock %}
+
+{% block content %}
+
+Navigating an Educational Experience through Augmenting our Reality
+    {% for project in prjs %}
+
+        {{project.project_title}}
+        {{project.phase_name}}
+        {{project.num_of_people_experienced}}
+
+    {% endfor %}
+
+{% endblock %}

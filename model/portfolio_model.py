@@ -23,7 +23,7 @@ class Project:
         self.places = cells[7]
         self.phase_name = cells[8].strip()
         self.fullproject_title = cells[9]
-        self.image_url = cells[10]
+        self.image_urls = cells[10]
         self.organization_names = cells[11]
         self.about = cells[12]
         
@@ -86,9 +86,9 @@ class DataController:
         return projects
 
     #Sarah helped to start - a method that passes everything. 6/27/12
-    def get_projects(self, org=None, phase='Construction', year=None, num_people=None, place=None, tool=None):
+    def get_projects(self, org=None, phase=None, year=None, num_people=None, place=None, tool=None, image_url=None):
         '''
-        Returns a list of projects where the phase name matches. This also tells which resource initially shows.
+        Returns a list of all projects. This also tells which resource initially shows.
         '''
         projects = []
         for project in self.projects:
@@ -98,7 +98,25 @@ class DataController:
                 (year is None or project.start_year() == year) and
                 (num_people is None or project.num_of_people_experienced == num_people) and
                 (place is None or project.places == place) and
-                (tool is None or project.tools == tool)):
+                (tool is None or project.tools == tool) and
+                (image_url is None or project.image_urls == image_urls)):
+                projects.append(project)
+        return projects
+    
+    def get_final_projects(self, org=None, phase='Construction', year=None, num_people=None, place=None, tool=None, image_url=None):
+        '''
+        Returns a list of projects where the phase name matches. 
+        '''
+        projects = []
+        for project in self.projects:
+            #comment out hard coded phase name.  To be put in when more projects populate csv list. 
+            if (project.phase_name == phase and
+                (org is None or project.organization_category == org) and
+                (year is None or project.start_year() == year) and
+                (num_people is None or project.num_of_people_experienced == num_people) and
+                (place is None or project.places == place) and
+                (tool is None or project.tools == tool) and
+                (image_url is None or project.image_urls == image_urls)):
                 projects.append(project)
         return projects
         
@@ -162,20 +180,13 @@ class DataController:
         tools.sort()
         return tools
             
-    def print_titles(self, projects):
-        '''
-        Prints out a list of project titles
-        '''
-        for project in projects:
-            print(project.project_title)
-            
     def get_image_urls(self):
         '''
-        Returns a list of images from Flickr
+        Returns a list of urls images from Flickr
         '''
-        urls = set()
+        image_urls = set()
         for project in self.projects:
-            urls.add(project.urls)
-            urls = list(tools)
-            tools.sort()
-            return urls
+            image_urls.add(project.image_urls)
+            image_urls = list(image_urls)
+            image_urls.sort()
+            return image_urls
