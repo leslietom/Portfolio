@@ -26,6 +26,7 @@ class Project:
         self.image_urls = cells[10]
         self.organization_names = cells[11]
         self.about = cells[12]
+        self.project_id = cells[13]
         
     def clean_string(self, cells, index):
         try:
@@ -117,6 +118,17 @@ class DataController:
                 (place is None or project.places == place) and
                 (tool is None or project.tools == tool) and
                 (image_url is None or project.image_urls == image_urls)):
+                projects.append(project)
+        return projects
+    
+    #Using this method to return all project id's to group projects.
+    def get_allproject_ids(self, project_id=None):
+        '''
+        Returns a list of project ids. 
+        '''
+        projects = []
+        for project in self.projects:
+            if project.project_id == project_id:
                 projects.append(project)
         return projects
         
