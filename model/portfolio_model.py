@@ -18,7 +18,7 @@ class Project:
         self.project_description = cells[2]
         self.start_date = self.parse_date(cells[3]) ##need to change into a date object -- and is there a way to parse through and have project print for each year?
         self.end_date = self.parse_date(cells[4]) ##need to change into a date object
-        self.tools = cells[5]
+        self.tools = self.clean_string_colon(cells, 5)
         self.num_of_people_experienced = cells[6]
         self.places = cells[7]
         self.phase_name = cells[8].strip()
@@ -27,10 +27,11 @@ class Project:
         self.organization_names = cells[11]
         self.about = cells[12]
         self.project_id = cells[13]
-        
-    def clean_string(self, cells, index):
+    
+    #Leslie experimented with this def. This takes out the ":" -- but does not split apart the cells. (split() does not work) - 2 arguements needed
+    def clean_string_colon(self, cells, index):
         try:
-            return cells[index].strip().replace('"', '')
+            return cells[index].strip().replace(':', '')
         except:
             return ''
     
@@ -75,6 +76,7 @@ class DataController:
         '''
         return self.projects
     
+    #Leslie tried to just get the 'construction' phase to show for the main page. Still in progress - to be tied into index.
     def get_project_phases(self, phase):
         '''
         Returns a list of projects where the phase name matches. This also tells which resource initially shows.
@@ -104,6 +106,7 @@ class DataController:
                 projects.append(project)
         return projects
     
+    #Leslie tried to just get the 'construction' phase to show for the main page. Still in progress - to be tied into index.
     def get_final_projects(self, org=None, phase='Construction', year=None, num_people=None, place=None, tool=None, image_url=None):
         '''
         Returns a list of projects where the phase name matches. 

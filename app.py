@@ -9,6 +9,14 @@ app = flask.Flask(__name__)
         ##Leslie: to get this to work like how i did in View class. -- get project_id. Filter function for phases in project_id.
         #phases = p.get_project(project_id)
 
+#Leslie trying to add a project class - so she can run a new URL rule.
+class project(flask.views.MethodView):
+    def get(self):
+        p = DataController()
+        p.read_file()
+        project = p.get_all_projects()
+        return flask.render_template('project.html', prjs=project, prgs=p.get_orgs(), image_urls=p.get_image_urls())
+
 
 #This comes from class DataController methods.
 class AllProjects(flask.views.MethodView):
@@ -55,6 +63,10 @@ class View(flask.views.MethodView):
                                      selected_place=place_filter,
                                      selected_tool=tool_filter)
         
+#Trying to add another project web page.
+app.add_url_rule('/project', view_func=project.as_view('project'), methods=['GET'])
+app.add_url_rule('/bySchool', view_func=project.as_view('bySchool'), methods=['GET'])
+
 #This is how you create more web pages / templates.    
 app.add_url_rule('/allprojects', view_func=AllProjects.as_view('allprojects'), methods=['GET'])
 app.add_url_rule('/', view_func=View.as_view('index'), methods=['GET'])
