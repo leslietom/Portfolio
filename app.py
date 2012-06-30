@@ -27,6 +27,8 @@ class AllProjects(flask.views.MethodView):
         return flask.render_template('allprojects.html',
                                      prjs=allprojects,
                                      years=p.get_years(),
+                                     #Leslie added a_year to access year?
+                                     a_year=p.get_a_year(),
                                      orgs=p.get_orgs(),
                                      num_ppl=p.get_num_ppl(),
                                      tools=p.get_tools(),
@@ -46,7 +48,7 @@ class View(flask.views.MethodView):
         tool_filter = flask.request.args.get('tool', None)
         image_urls_filter = flask.request.args.get('image_url', None)
         
-        projects = p.get_projects(org=org_filter, year=year_filter, num_people=people_filter, place=place_filter, tool=tool_filter, image_url=image_urls_filter)
+        projects = p.get_construction_projects(org=org_filter, year=year_filter, num_people=people_filter, place=place_filter, tool=tool_filter, image_url=image_urls_filter)
         
         #Sarah helped to set up return flask.render_template 6/25/12
         return flask.render_template('index.html',

@@ -7,6 +7,7 @@
     <h2>All Projects</h2>
     <table>
         <tr>
+            <th>Image:</th>
             <th>Organization/Client:</th>
             <th>Project Title:</th>
             <th>Project Phase:</th>
@@ -15,20 +16,19 @@
             <th>Tools:</th>
             <th>Start Date:</th>
             <th>End Date:</th>
-            <th>Image:</th>
         </tr>
         {% for project in prjs %}
-        <tr> 
-            <td>{{project.organization_names}}</td>
-            <td>{{project.project_title}}</td>
-            <td>{{project.phase_name}}</td>
-            <td>{{project.num_of_people_experienced}}</td>
-            <td>{{project.places}}</td>
-            <td>{{project.tools}}</td>
-            <td>{{project.start_date}}</td>
-            <td>{{project.end_date}}</td>
-            <td><img src="{{project.image_urls}}" height="100px"/></td>
-        </tr>
+            <tr>
+                <td align="center"><a href="/project"><img src="{{project.image_urls}}" height="100px"/></a></td>
+                <td>{{project.organization_names}}</td>
+                <td>{{project.project_title}}</td>
+                <td>{{project.phase_name}}</td>
+                <td>{{project.num_of_people_experienced}}</td>
+                <td>{{project.places}}</td>
+                <td>{{project.tools}}</td>
+                <td>{{project.start_date}}</td>
+                <td>{{project.end_date}}</td>
+            </tr>
         {% endfor %}
      </table>
 

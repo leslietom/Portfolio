@@ -7,13 +7,17 @@
     <div id='small_portfolio' style="background-color: #FFFFFF; height:100px;width:80%;float:left; border-color: #000000; border-width: 1px;">
         {% for project in prjs %}
         <!--the smaller_portfolio div - helps to set height of each table repeat.-->
-        <div id='smaller_portfolio' style="background-color: #666; height:250px; width:50% float:left; padding-left: 3px">
+        <div id='smaller_portfolio' style="background-color: #666; height:290px; width:50% float:left; padding-left: 3px">
         <table>
         <tr>
             <td>
-                <a href="/bySchool"><img src="{{project.image_urls}}" height="200px"/></a>
+                <a href="/project"><img src="{{project.image_urls}}" height="200px"/></a>
                 <br/>
                     {{project.fullproject_title}}
+                <br/>
+                    {{project.start_date}}
+                <br/>
+                        Year: {{a_year}}
             </td>
         </tr>
         </table>

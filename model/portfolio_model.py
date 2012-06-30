@@ -106,8 +106,16 @@ class DataController:
                 projects.append(project)
         return projects
     
+    #Leslie tried to get year.
+    def get_a_year(self, year=None):
+        projects = []
+        for project in self.projects:
+            if year is None or project.start_year == year:
+                projects.append(project)
+        return projects
+    
     #Leslie tried to just get the 'construction' phase to show for the main page. Still in progress - to be tied into index.
-    def get_final_projects(self, org=None, phase='Construction', year=None, num_people=None, place=None, tool=None, image_url=None):
+    def get_construction_projects(self, org=None, phase='Construction', year=None, num_people=None, place=None, tool=None, image_url=None):
         '''
         Returns a list of projects where the phase name matches. 
         '''
