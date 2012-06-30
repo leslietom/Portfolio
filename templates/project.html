@@ -4,14 +4,11 @@
 
 {% block content %}
 
-project id is {{project_id}}
+{% for phase in phases %}
+    <img src="{{phase.image_urls}}"/>
+    <br/>
+    {{phase.project_description}}
+    <br/>
+{% endfor %}
 
-<!-- {%for org in orgs%}
-        <a href="/project/{{project_id}}</a>
-      {% endfor %}
--->
-<h2>{{fullproject_title}}</h2>
-<!--<img src="{{image_urls}}" height="400px"/>
-{{project_description}}
--->
 {% endblock %}

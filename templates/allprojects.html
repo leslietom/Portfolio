@@ -19,7 +19,7 @@
         </tr>
         {% for project in prjs %}
             <tr>
-                <td align="center"><a href="/project"><img src="{{project.image_urls}}" height="100px"/></a></td>
+                <td align="center"><a href="/project?project_id={{project.project_id}}"><img src="{{project.image_urls}}" height="100px"/></a></td>
                 <td>{{project.organization_names}}</td>
                 <td>{{project.project_title}}</td>
                 <td>{{project.phase_name}}</td>

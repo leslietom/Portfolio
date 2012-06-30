@@ -3,19 +3,22 @@
 import flask, flask.views
 from model.portfolio_model import DataController
 
-app = flask.Flask(__name__)
-
         ##phases = p.get_allproject_ids(project_id = id_filter)
         ##Leslie: to get this to work like how i did in View class. -- get project_id. Filter function for phases in project_id.
         #phases = p.get_project(project_id)
 
 #Leslie trying to add a project class - so she can run a new URL rule.
-class project(flask.views.MethodView):
+class Project(flask.views.MethodView):
     def get(self):
         p = DataController()
         p.read_file()
-        project = p.get_all_projects()
-        return flask.render_template('project.html', prjs=project, prgs=p.get_orgs(), image_urls=p.get_image_urls())
+        
+        project_id_filter = flask.request.args.get('project_id', None)
+        
+        project_phases = p.get_project_phases(project_id=project_id_filter)
+        
+        return flask.render_template('project.html',
+                                     phases=project_phases)
 
 
 #This comes from class DataController methods.
@@ -35,7 +38,7 @@ class AllProjects(flask.views.MethodView):
                                      places=p.get_places(),
                                      image_urls=p.get_image_urls())
 
-class View(flask.views.MethodView):
+class RootFilter(flask.views.MethodView):
     def get(self):
         p = DataController()
         p.read_file()
@@ -64,15 +67,14 @@ class View(flask.views.MethodView):
                                      selected_num_people=people_filter,
                                      selected_place=place_filter,
                                      selected_tool=tool_filter)
-        
-#Trying to add another project web page.
-app.add_url_rule('/project', view_func=project.as_view('project'), methods=['GET'])
-app.add_url_rule('/bySchool', view_func=project.as_view('bySchool'), methods=['GET'])
 
-#This is how you create more web pages / templates.    
-app.add_url_rule('/allprojects', view_func=AllProjects.as_view('allprojects'), methods=['GET'])
-app.add_url_rule('/', view_func=View.as_view('index'), methods=['GET'])
+portfolio_app = flask.Flask(__name__)
 
+portfolio_app.add_url_rule('/', view_func=RootFilter.as_view('main'), methods=['GET'])
+portfolio_app.add_url_rule('/project', view_func=Project.as_view('project'), methods=['GET'])
 
-app.debug = True
-app.run()
+#This is how you create more web pages / templates.
+portfolio_app.add_url_rule('/allprojects', view_func=AllProjects.as_view('allprojects'), methods=['GET'])
+
+portfolio_app.debug = True
+portfolio_app.run(host="localhost", port=5000)

@@ -77,14 +77,14 @@ class DataController:
         return self.projects
     
     #Leslie tried to just get the 'construction' phase to show for the main page. Still in progress - to be tied into index.
-    def get_project_phases(self, phase):
+    def get_project_phases(self, project_id):
         '''
         Returns a list of projects where the phase name matches. This also tells which resource initially shows.
         '''
         projects = []
         for project in self.projects:
             #print(project.phase_name)
-            if project.phase_name == phase:
+            if project.project_id == project_id:
                 projects.append(project)
         return projects
 
