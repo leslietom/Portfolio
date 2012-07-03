@@ -4,6 +4,7 @@ __author__ = 'Leslie Tom'
 __email__ = 'leslie.tom@gmail.com'
 __python_version__ = '3.2.3'
 
+#Import datetime to create datetime objects.
 from datetime import datetime
 
 class Project:
@@ -21,6 +22,7 @@ class Project:
         self.tools = self.clean_string_colon(cells, 5)
         self.num_of_people_experienced = cells[6]
         self.places = cells[7]
+        #organized based on phases -- filtering by final phase of projects 'construction'
         self.phase_name = cells[8].strip()
         self.fullproject_title = cells[9]
         self.image_urls = cells[10]
@@ -28,7 +30,7 @@ class Project:
         self.about = cells[12]
         self.project_id = cells[13]
     
-    #Leslie experimented with this def. This takes out the ":" -- but does not split apart the cells. (split() does not work) - 2 arguements needed
+    #Leslie experimented with this def. This takes out the ":" -- but does not split apart the cells. (split() does not work) 
     def clean_string_colon(self, cells, index):
         try:
             return cells[index].strip().replace(':', '')
@@ -81,22 +83,22 @@ class DataController:
         '''
         Returns a list of projects where the phase name matches. This also tells which resource initially shows.
         '''
+        #create an empty projects list.
         projects = []
         for project in self.projects:
-            #print(project.phase_name)
+            #When user clicks on image of "construction" projects - this will iterate through objects and append a project list for matching project_id's.
             if project.project_id == project_id:
                 projects.append(project)
         return projects
 
     #Sarah helped to start - a method that passes everything. 6/27/12
+    #
     def get_projects(self, org=None, phase=None, year=None, num_people=None, place=None, tool=None, image_url=None):
         '''
         Returns a list of all projects. This also tells which resource initially shows.
         '''
         projects = []
         for project in self.projects:
-            #comment out hard coded phase name.  To be put in when more projects populate csv list. 
-            #if (project.phase_name == phase and
             if ((org is None or project.organization_category == org) and
                 (year is None or project.start_year() == year) and
                 (num_people is None or project.num_of_people_experienced == num_people) and
@@ -106,22 +108,14 @@ class DataController:
                 projects.append(project)
         return projects
     
-    #Leslie tried to get year.
-    def get_a_year(self, year=None):
-        projects = []
-        for project in self.projects:
-            if year is None or project.start_year == year:
-                projects.append(project)
-        return projects
-    
-    #Leslie tried to just get the 'construction' phase to show for the main page. Still in progress - to be tied into index.
+    #Leslie tried to just get the 'construction' phase to show for the main page.
     def get_construction_projects(self, org=None, phase='Construction', year=None, num_people=None, place=None, tool=None, image_url=None):
         '''
         Returns a list of projects where the phase name matches. 
         '''
         projects = []
         for project in self.projects:
-            #comment out hard coded phase name.  To be put in when more projects populate csv list. 
+            #To be used for splash page. 
             if (project.phase_name == phase and
                 (org is None or project.organization_category == org) and
                 (year is None or project.start_year() == year) and
@@ -129,6 +123,14 @@ class DataController:
                 (place is None or project.places == place) and
                 (tool is None or project.tools == tool) and
                 (image_url is None or project.image_urls == image_urls)):
+                projects.append(project)
+        return projects
+    
+        #Leslie trying to experiment with getting year.
+    def get_a_year(self, year=None):
+        projects = []
+        for project in self.projects:
+            if year is None or project.start_year == year:
                 projects.append(project)
         return projects
     

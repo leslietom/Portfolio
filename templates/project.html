@@ -5,10 +5,17 @@
 {% block content %}
 
 {% for phase in phases %}
-    <img src="{{phase.image_urls}}"/>
-    <br/>
-    {{phase.project_description}}
-    <br/>
+    
+    <table id=detailed_portfolio>
+        <tr>
+            <td><img src="{{phase.image_urls}}"/></td>
+            <td>
+                <h3>{{phase.fullproject_title}}</h3><br/>
+                {{phase.project_description}}
+            </td>
+        </tr>
+    </table>
 {% endfor %}
+
 
 {% endblock %}

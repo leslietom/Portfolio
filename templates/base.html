@@ -1,22 +1,23 @@
 <!doctype html>
-
+<!--This is the main HTML page-->
 <html lang="en">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <link rel="stylesheet" href="style.css" />
     <title>{% block title %}{% endblock %} - Portfolio</title>
+    <!--Experimenting with Internal Style sheets -- to move all In-line style here or externally...-->
     <style type="text/css">
         body {
-	background-color: #000000;
+	background-color: #FFFFFF;
         }
           table,th,td {
              border:1px solid black;
           }
 
           headerbox {
-             background-color:#FFD700
+             background-color:#FFFFFF
           }
-
+        /*This allows base.html to be extended*/
        {% block css %} {% endblock %}
     </style>
 </head>
@@ -26,16 +27,13 @@
    </div>
 
    <div id='subheading'>
+    <!--This links the allprojects.html template to a link which shows a table of all projects-->
       <a title="List All Projects" href="/allprojects">List All Project</a>
    </div>
 
     <!--Worked with Sarah to iterate through DataController methods 6/27/12-->
-   <div id="project_menu" style="background-color:#FFD700;height:700px;width:20%;float:left; border-width: 1px;">
+   <div id="project_menu" style="background-color:#FFFFFF;height:700px;width:20%;float:left; border-width: 1px;">
       <h2>Organizations/Clients</h2>
-      <!--Got code from w3schools.com http://www.w3schools.com/tags/tag_button.asp-->
-      <a href="/bySchool"><button type="button">School</button></a>
-    <a href="/neear"><button type="button">NEEAR</button></a>
-      <br/>
       {%for org in orgs%}
         <ul>
             <li><a href="/?org={{org}}">{{org}}</a>
@@ -46,11 +44,11 @@
       {% endfor %}
    </div>
 
-   <div id="main" style="background-color: #FF0000; height:auto;width:60%;float:left; border-width: 1px;">
+   <div id="main" style="background-color: #FFFFFF; height:auto;width:60%;float:left; border-width: 1px;">
     <div id="content">{% block content %}{% endblock %}</div>
    </div>
 
-   <div id="people_menu" style="background-color:#FFD700;height:700px;width:20%;float:left; border-width: 1px;">
+   <div id="people_menu" style="background-color:#FFFFFF;height:700px;width:20%;float:left; border-width: 1px;">
       <h2>No. of People Experienced</h2>
         {%for num_people in people%}
         <a href="/?num_people={{num_people}}">{{num_people}}</a> 
